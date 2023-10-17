@@ -15,11 +15,14 @@ async function runExample(){
   x[9] - document.getElementById('box10').value;
   x[10] - document.getElementById('box11').value;
 
-  let tensorX = new onnx.Tensor(x, 'float32', [1, 11])  ## conver to onnx
+  let tensorX = new onnx.Tensor(x, 'float32', [1, 11])  ## convert to onnx
 
   let session = new onnx.InferenceSession();
 
-  await seession.loadModel("");
+  await session.loadModel("DLnet_WineData.onnx");
+  let outputMap = await session.run([tensorX]);
+
+  let outputData = outputMap.get('output1');
 
 
 
